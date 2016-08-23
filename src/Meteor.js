@@ -121,8 +121,10 @@ module.exports = {
 
       console.info("Disconnected from DDP server.");
 
-      if(!lastDisconnect || new Date() - lastDisconnect > 3000) {
-        Data.ddp.connect();
+      if (options.autoReconnect) {
+        if(!lastDisconnect || new Date() - lastDisconnect > 3000) {
+          Data.ddp.connect();
+        }
       }
 
       lastDisconnect = new Date();
